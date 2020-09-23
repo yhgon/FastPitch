@@ -312,6 +312,7 @@ def main():
     log = lambda s, d: DLLogger.log(step=s, data=d) if log_enabled else None
 
     # for repeat in (tqdm.tqdm(range(reps)) if reps > 1 else range(reps)):
+    k=0
     for rep in range(reps):
         for b in batches:
             if generator is None:
@@ -326,11 +327,12 @@ def main():
                 all_letters += b['text_lens'].sum().item()
                 all_frames += mel.size(0) * mel.size(2)
                 
-                mel_fname = b['output'][i] if 'output' in b else f'audio_{i}.pt'
+                mel_fname = b['output'][k] if 'output' in b else f'audio_{k}.pt'
                 mel_path = Path(args.output, mel_fname)               
                 torch.save(mel.cpu(), mel_path)
                 log(rep, {"fastpitch_frames_per_sec": gen_infer_perf})
                 log(rep, {"fastpitch_latency": gen_measures[-1]})
+                k=k+1
 
             if waveglow is not None:
                 with torch.no_grad(), waveglow_measures:
