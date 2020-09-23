@@ -325,6 +325,10 @@ def main():
                 gen_infer_perf = mel.size(0) * mel.size(2) / gen_measures[-1]
                 all_letters += b['text_lens'].sum().item()
                 all_frames += mel.size(0) * mel.size(2)
+                
+                mel_fname = b['output'][i] if 'output' in b else f'audio_{i}.pt'
+                mel_path = Path(args.output, mel_fname)               
+                torch.save(mel.cpu(), mel_path)
                 log(rep, {"fastpitch_frames_per_sec": gen_infer_perf})
                 log(rep, {"fastpitch_latency": gen_measures[-1]})
 
