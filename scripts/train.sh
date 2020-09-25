@@ -10,6 +10,7 @@
 [ ! -n "$GRAD_ACC" ] && GRAD_ACC=1
 [ ! -n "$EPOCHS" ] && EPOCHS=1500
 [ "$AMP" == "true" ] && AMP_FLAG="--amp"
+[ "$RESUME" == "true" ] && RESUME_FLAG="--resume"
 
 GBS=$(($NGPU * $BS * $GRAD_ACC))
 [ $GBS -ne 256 ] && echo -e "\nWARNING: Global batch size changed from 256 to ${GBS}.\n"
@@ -37,4 +38,5 @@ python -m torch.distributed.launch --nproc_per_node ${NGPU} train.py \
     --pitch-predictor-loss-scale 0.1 \
     --weight-decay 1e-6 \
     --gradient-accumulation-steps ${GRAD_ACC} \
-    ${AMP_FLAG}
+    ${AMP_FLAG} \
+    ${RESUME_FLAG}
