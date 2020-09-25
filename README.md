@@ -79,6 +79,7 @@ smoothing out the upsampled signal, and constructing a mel-spectrogram.
 
 ### Getting Started Guide.
 
+#### prepare 
 1. clone source
 2. download dataset
 3. extract dataset 
