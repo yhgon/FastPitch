@@ -70,17 +70,29 @@ smoothing out the upsampled signal, and constructing a mel-spectrogram.
 
 ## TODO list ( delta from original )
 - seperate scripts and code.
-   for example, `extrac_mels.py` generate mel and calculate pitch(fundamental frequency) and extract duration. 
+   
 - use phoneme instead of raw text
 - add SV(speaker verification) d-vector embeddings from VoxCeleb2 and speaker embedding from LibriTTS
 - cosine LR schedule for large BatchSize for scale up ( upto 64 GPUs) 
 - modified STFT algorithm and support other vocoder 
 
 
-### inference
-#### Quick Start Guide
-#### Clone the repository.
+### Getting Started Guide.
 
-### train
-#### Getting the Data
+1. clone source
+2. download dataset
+3. extract dataset 
+3. download tacoton2 and waveglow checkpoint 
+4. prepare dataset for training ( wavs, mel, duration, pitch)
+
+#### inference
+1. download waveglow checkpoint fastpitch checkpoint.
+2. inference
+3. compare voice 
+ 1. wave original
+ 2. wave  from original mel  w/ waveglow vocoder
+ 3. wave from synthesized mel w/ waveglow vocoder
+
+#### train
+1. train w/ train script
  
